@@ -2,7 +2,6 @@ import Exponent from 'exponent';
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import TaskList from './TaskList';
@@ -13,6 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 40,
   },
 });
 
@@ -24,6 +24,9 @@ class App extends React.Component {
         {
           task: 'Learn React Native',
         },
+        {
+          task: 'Another todo',
+        },
       ],
     };
   }
@@ -31,8 +34,9 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello world!</Text>
-        <TaskList />
+        <TaskList
+          todos={this.state.todos}
+        />
       </View>
     );
   }
