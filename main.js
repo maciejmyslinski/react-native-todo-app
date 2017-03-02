@@ -5,16 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
-
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Hello world!</Text>
-      </View>
-    );
-  }
-}
+import TaskList from './TaskList';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,5 +15,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+class App extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      todos: [
+        {
+          task: 'Learn React Native',
+        },
+      ],
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Hello world!</Text>
+        <TaskList />
+      </View>
+    );
+  }
+}
 
 Exponent.registerRootComponent(App);
