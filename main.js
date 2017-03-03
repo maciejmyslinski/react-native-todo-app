@@ -27,12 +27,16 @@ class App extends React.Component {
         },
       ],
     };
+    this.onAddStarted = () => {
+      console.log('on add started');
+    };
   }
 
   render() {
     return (
       <View style={styles.container}>
         <TaskList
+          onAddStarted={this.onAddStarted}
           todos={this.state.todos}
         />
       </View>
