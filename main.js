@@ -3,8 +3,10 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  Navigator,
 } from 'react-native';
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,16 +30,53 @@ class App extends React.Component {
       ],
     };
     this.onAddStarted = () => {
-      console.log('on add started');
+      this.nav.push({
+        name: 'taskform',
+      });
     };
+
+    this.onCancel = () => {
+      this.nav.pop();
+    };
+
+    this.onAdd = (task) => {
+      this.state.todos.push({ task });
+      this.setState({ todos: this.state.todos });
+      this.nav.pop();
+    };
+
+    this.renderScene = (route) => {
+      switch (route.name) {
+        case 'taskform':
+          return (
+            <TaskForm
+              onCancel={this.onCancel}
+              onAdd={this.onAdd}
+            />
+          );
+        default:
+          return (
+            <TaskList
+              onAddStarted={this.onAddStarted}
+              todos={this.state.todos}
+            />
+          );
+      }
+    };
+
+    this.configureScene = () => Navigator.SceneConfigs.FloatFromBottom;
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TaskList
-          onAddStarted={this.onAddStarted}
-          todos={this.state.todos}
+        <Navigator
+          initialRoute={{ name: 'tasklist', index: 0 }}
+          ref={((nav) => {
+            this.nav = nav;
+          })}
+          renderScene={this.renderScene}
+          configureScene={this.configureScene}
         />
       </View>
     );
