@@ -1,10 +1,11 @@
 import React from 'react';
 
 import {
-  Text,
   View,
   ListView,
 } from 'react-native';
+
+import TaskRow from './TaskRow';
 
 class TaskList extends React.Component {
   constructor(props, context) {
@@ -18,7 +19,7 @@ class TaskList extends React.Component {
       dataSource: ds.cloneWithRows(props.todos),
     };
 
-    this.renderRow = todo => <Text>{todo.task}</Text>;
+    this.renderRow = todo => <TaskRow todo={todo} />;
   }
 
   render() {
